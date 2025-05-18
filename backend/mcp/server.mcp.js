@@ -16,7 +16,7 @@ const server = new McpServer({
 // Set up server resources, tools, and prompts here
 
 server.tool(
-  "Add two numbers", // tool name
+  "AddTwoNumbers", // tool name
   "Adds given 2 numbers", // tool description
   {
     // tool parameters

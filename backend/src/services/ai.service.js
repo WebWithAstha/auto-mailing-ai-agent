@@ -10,7 +10,7 @@ const {tools}  = await mcpClient.listTools()
 
 function getSystemInstruction(user) {
 
-    console.log(user)
+    // console.log(user,"hi")
     return `
     <persona>
 
@@ -40,7 +40,7 @@ async function getResponse(messages,user) {
             tools:[
                { functionDeclarations : tools.map(tool => {
                         return {
-                            name: tool.name.replace(/\s+/g, '_'),
+                            name: tool.name,
                             description: tool.description,
                             parameters: {
                                 type:tool.inputSchema.type,
@@ -52,11 +52,11 @@ async function getResponse(messages,user) {
             ]
         }
     })
-    console.log(response.functionCalls)
+    // console.log(response.functionCalls)
     const functionCall = response.functionCalls && response.functionCalls[0]
     if(functionCall){
         const toolResult = await mcpClient.callTool({
-            name:functionCall.name.replace(/_/g, ' '), // tool name
+            name:functionCall.name, // tool name
             arguments : functionCall.args // tool parameters
         })
         const result = toolResult.content[0].text
